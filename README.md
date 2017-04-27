@@ -2,7 +2,7 @@
 Gulp plugin merge yaml
 
 # Install
-```sh
+```bash
 npm install --save-dev gulp-yml-merge
 ```
 
@@ -14,7 +14,37 @@ const ymlMerge = require('gulp-yml-merge');
 
 gulp.task('merge', () => {
   gulp.src('a.yml')
-    .pipe(ymlMerge('b.yml'))
+    .pipe(ymlMerge({
+      targetPath: 'b.yml',
+      isPriorSrc: true
+    }))
     .pipe(gulp.dest('./dist'))
 });
+```
+
+```yaml
+# a.yml
+foo: foo
+bar: bar
+qux:
+  a: a
+  b: b
+```
+
+```yaml
+# b.yml
+foo: foo-foo
+baz: baz
+qux:
+  b: b-b
+```
+
+```yaml
+# dist/a.yml
+foo: foo
+baz: baz
+qux:
+  a: a
+  b: b
+bar: bar
 ```

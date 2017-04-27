@@ -1,12 +1,15 @@
 /**
  * gulp-yml-merge
  *
- * @param {string} targetPath File path to target yaml
+ * @param {object} options
+ * @param {string} options.targetPath - path to target yaml
+ * @param {boolean} options.isPriorSrc - whether to prioritize src yaml(Default: false)
 */
 const yaml = require('js-yaml');
 const fs = require('fs');
 const through = require('through2');
-const PluginError = require('gulp-util').PluginError;
+const gutil = require('gulp-util')
+const PluginError = gutil.PluginError;
 
 const PLUGIN_NAME = 'gulp-yml-merge';
 
@@ -17,7 +20,7 @@ const merge = (a, b) => {
   return new Buffer(data)
 };
 
-module.exports = (targetPath) => {
+module.exports = ({ targetPath, isPriorSrc = false }) => {
   if (!targetPath) {
     throw new PluginError(PLUGIN_NAME, 'Missing targetPath!');
   }
@@ -33,7 +36,12 @@ module.exports = (targetPath) => {
     }
     try {
       const targetFile = fs.readFileSync(targetPath, 'utf8');
-      const data = merge(file.contents, targetFile);
+      let data;
+      if (isPriorSrc) {
+        data = merge(targetFile, file.contents);
+      } else {
+        data = merge(file.contents, targetFile);
+      }
       const output = file.clone({ contents: false });
       output.contents = data;
       this.push(output);
