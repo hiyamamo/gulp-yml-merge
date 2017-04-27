@@ -1,16 +1,22 @@
 {
   "name": "gulp-yml-merge",
   "version": "0.0.1",
-  "description": "Gulp plugin to merge yaml file",
+  "description": "Gulp plugin merge yaml",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hiyamamo/gulp-yml-merge.git"
+  },
   "keywords": [
     "gulp",
-    "yaml"
+    "gulpplugin",
+    "yaml",
+    "yml"
   ],
-  "author": "hiyamamo",
+  "author": "Hiroki Yamamoto (https://github.com/hiyamamo)",
   "license": "MIT",
   "dependencies": {
     "gulp-util": "^3.0.8",
