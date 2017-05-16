@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/gulp-yml-merge.svg)](https://badge.fury.io/js/gulp-yml-merge)
+
 # gulp-yml-merge
 Gulp plugin merge yaml
 
